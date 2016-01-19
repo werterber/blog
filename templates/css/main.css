@@ -66,3 +66,9 @@ li{
 .nopaddingLeft {
     padding-left:0px;
 }
+
+.btn-galerie {
+    color: #F7DBBD;
+    background-color:#572C00;
+    margin: auto;
+}
