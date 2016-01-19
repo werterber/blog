@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}    
+    <h2> Načtěte novou fotku: </h2>
+    <form enctype="multipart/form-data" method="post">
+        <input type="hidden" name="token" value="{{token}}"/>
+        <div>nazev</div>
+            <input type="text" name="name" value="{{name}}">
+            <br>
+        <label>Vyberte foktu:</label>
+        <div><input type="file" name="img"/></div>
+        <div>rozměry</div>
+            <input type="text" name="measurements" value="{{measurements}}">
+            <br>
+        <div>material</div>
+            <input type="text" name="material" value="{{material}}">
+            <br>
+        <div><input type="submit"></div>
+        
+    </form>
+      
+{% endblock %}

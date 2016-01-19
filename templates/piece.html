@@ -1,0 +1,21 @@
+<div class="piece">
+  <div class="piece-heading">
+    <div class="piece-title">
+      {{p.name}}
+    </div>
+
+    <div class="piece-date">
+      {{p.date.strftime("%d.%m, %Y")}}
+    </div>
+  </div>
+
+  <div class="post-photo">
+    {{('<div><img class="img-responsive" src="/img?img_id=%s" alt={{p.name}}></img>' %  p.key()) | safe}}
+  </div>
+  <div>
+      Rozměry: {{p.measurements}}
+  </div>
+  <div>
+    Material: {{p.material}}
+  </div>
+</div>

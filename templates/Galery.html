@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% for a in arts %}
+    {{ a.render() | safe }}
+    <br><br>
+  {% endfor %}
+
+{% endblock %}
