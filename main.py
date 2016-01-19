@@ -238,7 +238,9 @@ class Image(webapp2.RequestHandler):
 
 class Galery(Handler):
     def get(self):
-        arts = Piece.all().fetch(10)
+        #arts = Piece.all().fetch(10)
+        arts = db.GqlQuery("SELECT * FROM Piece ORDER BY date DESC LIMIT 20")
+        arts = list(arts)
         if not arts:
             self.write("Galerie je prázdná.")
         else:
