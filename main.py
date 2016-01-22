@@ -223,6 +223,11 @@ class Piece(db.Model):
     material = db.StringProperty()
     date = db.DateTimeProperty(auto_now_add=True)
 
+    @classmethod
+    def by_name(cls, name):
+        p = Piece.all().filter('name =', name).get()
+        return p
+
     def render(self):
         return render_str("piece.html", p = self)
 
@@ -239,7 +244,7 @@ class Image(webapp2.RequestHandler):
 class Galery(Handler):
     def get(self):
         #arts = Piece.all().fetch(10)
-        arts = db.GqlQuery("SELECT * FROM Piece ORDER BY date DESC LIMIT 20")
+        arts = db.GqlQuery("SELECT * FROM Piece ORDER BY date DESC LIMIT 35")
         arts = list(arts)
         if not arts:
             self.write("Galerie je prázdná.")
@@ -286,7 +291,16 @@ class PostPiece(Handler):
             return
 
         self.render("permalink.html", piece = piece)
-                                             
+
+class SearchtheDatabase(Handler):
+    def get(self):
+        if self.user:
+            name = self.request.get('name')
+            result = Piece.by_name(name)
+            self.render("search-database.html", name=name, result=result)
+        else:
+            self.redirect('/prihlaseni')
+                                                      
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/signup', Register),
@@ -298,6 +312,7 @@ app = webapp2.WSGIApplication([
     ('/img', Image),
     ('/galerie', Galery),
     ('/novaSocha', newPiece),
-    ('/piece([0-9]+)', PostPiece)
+    ('/piece([0-9]+)', PostPiece),
+    ('/hledat', SearchtheDatabase)
 
 ], debug=True)

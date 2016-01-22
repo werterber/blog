@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+  <form>
+    <input type="text" name="name" value="{{name}}">
+    <input type="submit">
+  </form> 
+
+  <hr>
+ 
+ {% if result %} 
+  <div>
+    {{result.render()| safe}}
+  </div>
+{% endif %}
+{% endblock %}
