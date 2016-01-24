@@ -72,3 +72,13 @@ li{
     background-color:#572C00;
     margin: auto;
 }
+
+table {
+    width: 100%;
+    background-color: #FCF8E3;
+}
+
+th {
+    height: 50px;
+}
+tr:nth-child(even) {background-color: #f2f2f2}

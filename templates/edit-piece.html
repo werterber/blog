@@ -1,22 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}    
-    <h2> Načtěte novou fotku: </h2>
+    <h2> Upravte: </h2>
     <form enctype="multipart/form-data" method="post">
         <input type="hidden" name="token" value="{{token}}"/>
         <div>nazev</div>
-            <input type="text" name="name" value="{{name}}">
+            <input type="text" name="name" value="{{piece.name}}">
             <br>
-        <label>Vyberte foktu:</label>
-        <div><input type="file" name="img"/></div>
+        {{('<div><img class="img-responsive" src="/img?img_id=%s" alt=""></img>' %  piece.key()) | safe}}
         <div>rozměry</div>
-            <input type="text" name="measurements" value="{{measurements}}">
+            <input type="text" name="measurements" value="{{piece.measurements}}">
             <br>
         <div>material</div>
-            <input type="text" name="material" value="{{material}}">
+            <input type="text" name="material" value="{{piece.material}}">
             <br>
         <div>vyrobeno v roce</div>
-            <input type="text" name="crafted" value="{{crafted}}">
+            <input type="text" name="crafted" value="{{piece.crafted}}">
             <br>
         <div><input type="submit"></div>
         

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table border="1">
+    <th>Nazev</th>
+    <th>Autor</th>
+    <th>Rozměry</th>
+    <th>Material</th>
+    <th>Rok vyroby</th>
+    <th>Upravit</th>
+{% for item in results %}
+    <tr>
+        <td>{{ ('<a href="/piece%s" target="_blank" >%s</a>' % (item.key().id(), item.name))| safe }}</td>
+        <td>{{item.author}}</td>
+        
+        <td>{{item.measurements}}</td>
+        <td>{{item.material}}
+        <td>{{item.crafted}}</td>
+        <td>{{ ('<a href="/edit-piece%s" target="_blank" >Upravit</a>' % (item.key().id()))| safe }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
+

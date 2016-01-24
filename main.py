@@ -221,6 +221,7 @@ class Piece(db.Model):
     photo = db.BlobProperty()
     measurements = db.StringProperty()
     material = db.StringProperty()
+    crafted = db.IntegerProperty()
     date = db.DateTimeProperty(auto_now_add=True)
 
     @classmethod
@@ -268,6 +269,7 @@ class newPiece(Handler):
             piece.name = self.request.get("name")
             piece.measurements = self.request.get("measurements")
             piece.material = self.request.get("material")
+            piece.crafted = int(self.request.get("crafted"))
             photo = self.request.get('img')
             piece.photo = images.resize(photo, 500, 500)
 
@@ -300,7 +302,39 @@ class SearchtheDatabase(Handler):
             self.render("search-database.html", name=name, result=result)
         else:
             self.redirect('/prihlaseni')
-                                                      
+
+class ListPieces(Handler):
+    def get(self):
+        results = list(db.GqlQuery("SELECT* FROM Piece"))
+        self.render("list-database.html", results = results)
+
+class EditPiece(Handler):
+    def get(self, post_id):
+        if self.user:
+            key = db.Key.from_path('Piece', int(post_id))
+            piece = db.get(key)
+            self.send_form("edit-piece.html", piece = piece)
+
+    def post(self, post_id):
+        if self.valid_form() and self.user:
+            key = db.Key.from_path('Piece', int(post_id))
+            piece = db.get(key)
+            piece.author = self.user.name
+            piece.name = self.request.get("name")
+            piece.measurements = self.request.get("measurements")
+            piece.material = self.request.get("material")
+            piece.crafted = int(self.request.get("crafted"))
+            
+            if piece.photo and piece.name:
+                piece.put()
+                self.redirect('/piece%s' % str(piece.key().id()))
+            else:
+                self.response.out.write(
+                    'Něco se pokazilo.')
+        else:
+            self.response.headers['Content-Type'] = 'text/plain'
+            self.response.write('Not matching tokens or login')
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/signup', Register),
@@ -313,6 +347,8 @@ app = webapp2.WSGIApplication([
     ('/galerie', Galery),
     ('/novaSocha', newPiece),
     ('/piece([0-9]+)', PostPiece),
-    ('/hledat', SearchtheDatabase)
+    ('/hledat', SearchtheDatabase),
+    ('/seznam', ListPieces),
+    ('/edit-piece([0-9]+)', EditPiece)
 
 ], debug=True)
