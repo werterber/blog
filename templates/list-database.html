@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table border="1">
+<table class="zebra" border="1">
     <th>Nazev</th>
     <th>Autor</th>
     <th>Rozměry</th>
@@ -9,7 +9,7 @@
     <th>Rok vyroby</th>
     <th>Upravit</th>
 {% for item in results %}
-    <tr>
+    <tr class="">
         <td>{{ ('<a href="/piece%s" target="_blank" >%s</a>' % (item.key().id(), item.name))| safe }}</td>
         <td>{{item.author}}</td>
         

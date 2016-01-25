@@ -41,3 +41,7 @@ def valid_email(email):
 
 def make_token(length = 20):
     return ''.join(random.choice(letters) for x in xrange(length))
+
+def mk_int(s):
+    s = s.strip()
+    return int(s) if s else 0

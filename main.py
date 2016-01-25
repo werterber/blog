@@ -269,7 +269,7 @@ class newPiece(Handler):
             piece.name = self.request.get("name")
             piece.measurements = self.request.get("measurements")
             piece.material = self.request.get("material")
-            piece.crafted = int(self.request.get("crafted"))
+            piece.crafted = utils.mk_int(self.request.get("crafted"))
             photo = self.request.get('img')
             piece.photo = images.resize(photo, 500, 500)
 
@@ -319,7 +319,6 @@ class EditPiece(Handler):
         if self.valid_form() and self.user:
             key = db.Key.from_path('Piece', int(post_id))
             piece = db.get(key)
-            piece.author = self.user.name
             piece.name = self.request.get("name")
             piece.measurements = self.request.get("measurements")
             piece.material = self.request.get("material")
