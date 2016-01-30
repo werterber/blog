@@ -1,4 +1,2 @@
 mysecret.py
-mysecret.pyc
-main.pyc
-utils.pyc
+*.pyc
