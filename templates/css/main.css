@@ -84,3 +84,38 @@ th {
 .zebra tr:nth-child(even) {background-color: #f2f2f2}
 .zebra tr:nth-child(odd) {background-color: #FCF8E3}
 
+
+.nav-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #572C00;
+}
+
+.nav-btn {
+    float: left;
+}
+
+.nav-btn a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #663400 (black) on hover */
+.nav-btn a:hover {
+    background-color: #663400;
+    color:white;
+}
+
+.piece {
+    border: 1px solid brown;
+    width-max: 50%;
+}
+
+footer {
+    min-width: 100%;
+}

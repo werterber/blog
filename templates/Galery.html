@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<div class="row">
   {% for a in arts %}
     {{ a.render() | safe }}
-    <br><br>
   {% endfor %}
-
+</div>
 {% endblock %}

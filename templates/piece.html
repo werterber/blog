@@ -1,4 +1,4 @@
-<div class="piece">
+<div class="piece col-md-6">
   <div class="piece-heading">
     <div class="piece-title">
       {{p.name}}
@@ -10,7 +10,7 @@
   </div>
 
   <div class="post-photo">
-    {{('<div><img class="img-responsive" src="/img?img_id=%s" alt=""></img>' %  p.key()) | safe}}
+    {{('<div><img class="img-responsive" src="/img?img_id=%s" alt=""></img></div>' %  p.key()) | safe}}
   </div>
   <div>
       Rozměry: {{p.measurements}}

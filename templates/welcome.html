@@ -2,15 +2,13 @@
 
 {% block content %}
 
-  <div>{{username}}</div>
-  <br/>
-
-  <div>
-    <a href="/signup">registrace</a>
-    <a href="/prihlaseni">prihalseni se</a>
-    <a href="/">Uvodni stranka</a>
-    <a href="/novaSocha">Novy socha</a>
-    <a href="/galerie">Galerie</a>
+  <div class="">
+<ul class="nav-bar col-md-12">
+  <li class="nav-btn"><a href="/">Úvodní strana</a></li>
+  <li class="nav-btn"><a href="/novaSocha">Nová socha</a></li>
+  <li class="nav-btn"><a href="/galerie">Galerie</a></li>
+  <li class="nav-btn"><a href="/seznam">Seznam výrobků</a></li>
+</ul>
 
   </div>
 {% endblock %}
