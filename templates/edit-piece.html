@@ -17,8 +17,15 @@
         <div>vyrobeno v roce</div>
             <input type="text" name="crafted" value="{{piece.crafted}}">
             <br>
-        <div><input type="submit"></div>
+        <div><input type="submit" value="nahrat"></div>
         
+    </form>
+
+    <form action="/delete-piece" method="POST">
+        <input type="hidden" name="token" value="{{token}}"/>
+        <input type="hidden" value="{{id}}" name="id">
+        <input type="submit" value="smazat">
+
     </form>
       
 {% endblock %}

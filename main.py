@@ -147,6 +147,10 @@ class Piece(db.Model):
         p = Piece.all().filter('name =', name).get()
         return p
 
+    @classmethod
+    def by_id(cls, id):
+        return Piece.get_by_id(id)
+
     def render(self):
         return render_str("piece.html", p = self)
 
@@ -231,7 +235,7 @@ class EditPiece(Handler):
         if self.user:
             key = db.Key.from_path('Piece', int(post_id))
             piece = db.get(key)
-            self.send_form("edit-piece.html", piece = piece)
+            self.send_form("edit-piece.html", piece = piece, id = int(post_id))
 
     def post(self, post_id):
         if self.valid_form() and self.user:
@@ -252,6 +256,16 @@ class EditPiece(Handler):
             self.response.headers['Content-Type'] = 'text/plain'
             self.response.write('Not matching tokens or login')
 
+class DeletePiece(Handler):
+    def post(self):
+        if self.valid_form() and self.user:
+            id = int(self.request.get('id'))
+            piece = Piece.by_id(id)
+            piece.delete()
+            self.redirect('/')
+        else:
+            self.write("not logged.")
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/signup', Register),
@@ -266,6 +280,7 @@ app = webapp2.WSGIApplication([
     ('/piece([0-9]+)', PostPiece),
     ('/hledat', SearchtheDatabase),
     ('/seznam', ListPieces),
-    ('/edit-piece([0-9]+)', EditPiece)
+    ('/edit-piece([0-9]+)', EditPiece),
+    ('/delete-piece', DeletePiece)
 
 ], debug=True)
